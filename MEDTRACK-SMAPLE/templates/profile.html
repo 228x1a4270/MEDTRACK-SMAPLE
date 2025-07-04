@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-white">My Profile</h1>
+
+    <div class="card bg-dark text-white border-light">
+        <div class="card-header">
+            <h3>Profile Details</h3>
+        </div>
+        <div class="card-body">
+            <form id="profileForm">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="tel" class="form-control" id="phone">
+                </div>
+                <div class="mb-3">
+                    <label for="role" class="form-label">Role</label>
+                    <input type="text" class="form-control" id="role" readonly>
+                </div>
+
+                <div id="patientFields" style="display: none;">
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="age" min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label for="medicalHistory" class="form-label">Medical History</label>
+                        <textarea class="form-control" id="medicalHistory" rows="5"></textarea>
+                    </div>
+                </div>
+
+                <div id="doctorFields" style="display: none;">
+                    <div class="mb-3">
+                        <label for="specialization" class="form-label">Specialization</label>
+                        <input type="text" class="form-control" id="specialization">
+                    </div>
+                    <div class="mb-3">
+                        <label for="experience" class="form-label">Experience (Years)</label>
+                        <input type="number" class="form-control" id="experience" min="0">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary glow-button w-100 py-2 fs-5 rounded-3 mt-3">Update Profile</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock %}

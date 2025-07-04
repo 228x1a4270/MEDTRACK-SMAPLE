@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}My Appointments{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">My Appointments</h1>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3>Request New Appointment</h3>
+    </div>
+    <div class="card-body">
+        <form id="requestAppointmentForm">
+            <div class="mb-3">
+                <label for="doctorSelect" class="form-label">Select Doctor</label>
+                <select class="form-select" id="doctorSelect" required>
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="appointmentDate" class="form-label">Preferred Date</label>
+                <input type="date" class="form-control" id="appointmentDate" required>
+            </div>
+            <div class="mb-3">
+                <label for="appointmentTime" class="form-label">Preferred Time</label>
+                <input type="time" class="form-control" id="appointmentTime" required>
+            </div>
+            <button type="submit" class="btn btn-primary glow-button w-100 py-2 fs-5 rounded-3">Request Appointment</button>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3>All My Appointments</h3>
+    </div>
+    <div class="card-body">
+        <div id="appointmentsList">
+            <p class="text-muted">Loading appointments...</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/patient_appointments.js') }}"></script>
+{% endblock %}

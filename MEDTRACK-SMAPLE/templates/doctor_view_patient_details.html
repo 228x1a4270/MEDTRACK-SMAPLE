@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Details{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Patient Details</h1>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>Patient Profile</h3>
+            </div>
+            <div class="card-body">
+                <p><strong>Name:</strong> <span id="patientName"></span></p>
+                <p><strong>Email:</strong> <span id="patientEmail"></span></p>
+                <p><strong>Age:</strong> <span id="patientAge"></span></p>
+                <p><strong>Phone:</strong> <span id="patientPhone"></span></p>
+                 <div class="mb-3">
+                    <label for="medicalHistory" class="form-label"><strong>Medical History:</strong></label>
+                    <textarea class="form-control" id="medicalHistory" rows="5" readonly></textarea>
+                    <button class="btn btn-sm btn-outline-secondary mt-2" data-bs-toggle="modal" data-bs-target="#editMedicalHistoryModal">Edit Medical History</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>Patient Data Overview</h3>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="patientDetailsTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="activities-tab" data-bs-toggle="tab" data-bs-target="#activities" type="button" role="tab" aria-controls="activities" aria-selected="true">Activities</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="metrics-tab" data-bs-toggle="tab" data-bs-target="#metrics" type="button" role="tab" aria-controls="metrics" aria-selected="false">Health Metrics</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="goals-tab" data-bs-toggle="tab" data-bs-target="#goals" type="button" role="tab" aria-controls="goals" aria-selected="false">Goals</button>
+                    </li>
+                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="diagnoses-tab" data-bs-toggle="tab" data-bs-target="#diagnoses" type="button" role="tab" aria-controls="diagnoses" aria-selected="false">Diagnoses</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="appointments-tab" data-bs-toggle="tab" data-bs-target="#appointments" type="button" role="tab" aria-controls="appointments" aria-selected="false">Appointments</button>
+                    </li>
+                </ul>
+                <div class="tab-content mt-3" id="patientDetailsTabContent">
+                    <div class="tab-pane fade show active" id="activities" role="tabpanel" aria-labelledby="activities-tab">
+                        <div id="patientActivitiesList"><p class="text-muted">Loading activities...</p></div>
+                    </div>
+                    <div class="tab-pane fade" id="metrics" role="tabpanel" aria-labelledby="metrics-tab">
+                        <div id="patientMetricsList"><p class="text-muted">Loading health metrics...</p></div>
+                    </div>
+                    <div class="tab-pane fade" id="goals" role="tabpanel" aria-labelledby="goals-tab">
+                        <div id="patientGoalsList"><p class="text-muted">Loading goals...</p></div>
+                    </div>
+                     <div class="tab-pane fade" id="diagnoses" role="tabpanel" aria-labelledby="diagnoses-tab">
+                        <div id="patientDiagnosesList"><p class="text-muted">Loading diagnoses...</p></div>
+                    </div>
+                    <div class="tab-pane fade" id="appointments" role="tabpanel" aria-labelledby="appointments-tab">
+                        <div id="patientAppointmentsList"><p class="text-muted">Loading appointments...</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editMedicalHistoryModal" tabindex="-1" aria-labelledby="editMedicalHistoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editMedicalHistoryModalLabel">Edit Medical History</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="newMedicalHistory" class="form-label">Medical History</label>
+                    <textarea class="form-control" id="newMedicalHistory" rows="7"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary glow-button" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary glow-button" id="saveMedicalHistoryButton">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const PATIENT_USER_ID = "{{ patient_user_id }}"; // Flask passes this from URL
+</script>
+<script src="{{ url_for('static', filename='js/doctor_view_patient_details.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}My Diagnoses{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">My Diagnoses History</h1>
+
+<div class="card">
+    <div class="card-header">
+        <h3>Your Diagnosis Reports</h3>
+    </div>
+    <div class="card-body">
+        <div id="diagnosesList">
+            <p class="text-muted">Loading diagnoses...</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/patient_diagnoses.js') }}"></script>
+{% endblock %}

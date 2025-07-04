@@ -1,0 +1,101 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: 
+        url('/static/images/background.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    animation: backgroundMove 15s ease infinite;
+    color: #0c0101f0;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes backgroundMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Glowing button */
+.glow-button {
+    background-color: #ff1a1a;
+    color: #ffffff;
+    border: 2px solid white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff1a1a, 0 0 30px #ff1a1a;
+    transition: 0.3s ease-in-out;
+}
+
+.glow-button:hover {
+    box-shadow: 0 0 15px #ff9999, 0 0 30px #ff1a1a, 0 0 45px #ff1a1a;
+    background-color: #e60000;
+    cursor: pointer;
+}
+
+.navbar {
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid black;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+.container {
+    max-width: 960px;
+    margin: auto;
+    padding: 20px;
+    background-color: rgba(251, 249, 249, 0.941);
+    border-radius: 15px;
+    border: 2px solid rgb(248, 245, 245);
+    box-shadow: 0 0 15px rgba(245, 243, 243, 0.915);
+}
+
+.card {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    margin-bottom: 1.5rem;
+    padding: 15px;
+    border: 2px solid black;
+}
+
+.card-header {
+    background-color: rgba(255, 0, 0, 0.6);
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 0.5rem 0.5rem 0 0;
+    color: #ffffff;
+    border: 2px solid black;
+    box-shadow: 0 0 15px rgba(255, 100, 100, 0.5);
+}
+
+input.form-control,
+textarea.form-control {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000000;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+input.form-control:focus,
+textarea.form-control:focus {
+    background-color: rgba(255, 255, 255, 1);
+    color: #000000;
+    border: 2px solid black;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.alert {
+    margin-top: 15px;
+    background-color: rgba(255, 0, 0, 0.5);
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(255, 50, 50, 0.6);
+}

@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card mt-5">
+            <div class="card-header text-center">
+                <h2>Register for WellnessTracker</h2>
+            </div>
+            <div class="card-body">
+                <form id="registerForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirm_password" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirm_password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Register as:</label>
+                        <select class="form-select" id="role" required>
+                            <option value="">Select Role</option>
+                            <option value="patient">Patient</option>
+                            <option value="doctor">Doctor</option>
+                        </select>
+                    </div>
+                    <div id="patientFields" style="display: none;">
+                        <div class="mb-3">
+                            <label for="age" class="form-label">Age</label>
+                            <input type="number" class="form-control" id="age">
+                        </div>
+                        <div class="mb-3">
+                            <label for="medical_history" class="form-label">Medical History (Optional)</label>
+                            <textarea class="form-control" id="medical_history" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div id="doctorFields" style="display: none;">
+                        <div class="mb-3">
+                            <label for="specialty" class="form-label">Specialization</label>
+                            <select class="form-select" id="specialty">
+                                <option value="">Select Specialization</option>
+                                <option value="Cardiology">Cardiology</option>
+                                <option value="Dermatology">Dermatology</option>
+                                <option value="Endocrinology">Endocrinology</option>
+                                <option value="Gastroenterology">Gastroenterology</option>
+                                <option value="Neurology">Neurology</option>
+                                <option value="Oncology">Oncology</option>
+                                <option value="Orthopedics">Orthopedics</option>
+                                <option value="Pediatrics">Pediatrics</option>
+                                <option value="Psychiatry">Psychiatry</option>
+                                <option value="Radiology">Radiology</option>
+                                <option value="Urology">Urology</option>
+                                <option value="General Medicine">General Medicine</option>
+                                <option value="ENT">ENT</option>
+                                <option value="Pulmonology">Pulmonology</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone (Optional)</label>
+                        <input type="tel" class="form-control" id="phone">
+                    </div>
+                    <button type="submit" class="btn btn-primary glow-button w-100 py-2 fs-5 rounded-3">Register</button>
+                </form>
+                <div class="mt-3 text-center">
+                    Already have an account? <a href="{{ url_for('login_page') }}">Login here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+<script>
+    document.getElementById('role').addEventListener('change', function() {
+        const role = this.value;
+        document.getElementById('patientFields').style.display = (role === 'patient') ? 'block' : 'none';
+        document.getElementById('doctorFields').style.display = (role === 'doctor') ? 'block' : 'none';
+
+        // Set required attributes based on role
+        document.getElementById('age').required = (role === 'patient');
+        document.getElementById('specialty').required = (role === 'doctor');
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+        const role = document.getElementById('role').value;
+        const phone = document.getElementById('phone').value;
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+
+        const data = {
+            name,
+            email,
+            password,
+            role,
+            phone
+        };
+
+        if (role === 'patient') {
+            data.age = document.getElementById('age').value;
+            data.medical_history = document.getElementById('medical_history').value;
+        } else if (role === 'doctor') {
+            data.specialty = document.getElementById('specialty').value;
+        }
+
+        const response = await fetch('/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert(result.message);
+            window.location.href = '/login';
+        } else {
+            alert('Registration failed: ' + result.error);
+        }
+    });
+</script>
+{% endblock %}

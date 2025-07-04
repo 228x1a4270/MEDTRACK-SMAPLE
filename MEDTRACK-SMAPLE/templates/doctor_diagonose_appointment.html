@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Create Diagnosis{% endblock %}
+
+{% block content %}
+<h1 class="mb-4 text-white">Create Diagnosis for Appointment</h1>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3>Appointment Details</h3>
+    </div>
+    <div class="card-body">
+        <p><strong>Appointment ID:</strong> <span id="appointmentIdDisplay">Loading...</span></p>
+        <p><strong>Patient Name:</strong> <span id="patientNameDisplay">Loading...</span></p>
+        <p><strong>Date:</strong> <span id="appointmentDateDisplay">Loading...</span></p>
+        <p><strong>Time:</strong> <span id="appointmentTimeDisplay">Loading...</span></p>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3>Diagnosis Report</h3>
+    </div>
+    <div class="card-body">
+        <form id="diagnosisForm">
+            <div class="mb-3">
+                <label for="diagnosisReport" class="form-label">Diagnosis Report</label>
+                <textarea class="form-control" id="diagnosisReport" rows="10" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="diagnosisDate" class="form-label">Diagnosis Date</label>
+                <input type="date" class="form-control" id="diagnosisDate" value="{{ today }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary glow-button">Submit Diagnosis</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const APPOINTMENT_ID = "{{ appointment_id }}";
+</script>
+<script src="{{ url_for('static', filename='js/doctor_diagnose_appointment.js') }}"></script>
+{% endblock %}

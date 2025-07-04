@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Welcome, {{ session.get('name') }} (Patient Dashboard)</h1>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>My Stats</h3>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Total Activities Logged: <span id="totalActivities"></span></li>
+                <li class="list-group-item">Total Calories Burned (All Time): <span id="totalCalories"></span></li>
+                <li class="list-group-item">Activities This Week: <span id="thisWeekActivities"></span></li>
+                <li class="list-group-item">Active Goals: <span id="activeGoals"></span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>Upcoming Appointments</h3>
+            </div>
+            <ul class="list-group list-group-flush" id="upcomingAppointmentsList">
+                <li class="list-group-item text-muted">Loading appointments...</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>Recent Activities <a href="/patient/activities" class="btn btn-sm btn-outline-primary float-end">View All</a></h3>
+            </div>
+            <ul class="list-group list-group-flush" id="recentActivitiesList">
+                <li class="list-group-item text-muted">Loading activities...</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>Recent Health Metrics <a href="/patient/health_metrics" class="btn btn-sm btn-outline-primary float-end">View All</a></h3>
+            </div>
+            <ul class="list-group list-group-flush" id="recentHealthMetricsList">
+                <li class="list-group-item text-muted">Loading metrics...</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>Notifications <a href="/profile" class="btn btn-sm btn-outline-primary float-end">Manage Profile</a></h3>
+            </div>
+            <ul class="list-group list-group-flush" id="notificationsList">
+                <li class="list-group-item text-muted">Loading notifications...</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/patient_dashboard.js') }}"></script>
+{% endblock %}

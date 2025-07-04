@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}My Activities{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">My Activities</h1>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3>Log New Activity</h3>
+    </div>
+    <div class="card-body">
+        <form id="logActivityForm">
+            <div class="mb-3">
+                <label for="activityType" class="form-label">Activity Type</label>
+                <input type="text" class="form-control" id="activityType" required>
+            </div>
+            <div class="mb-3">
+                <label for="duration" class="form-label">Duration (minutes)</label>
+                <input type="number" class="form-control" id="duration" required min="1">
+            </div>
+            <div class="mb-3">
+                <label for="caloriesBurned" class="form-label">Calories Burned (optional)</label>
+                <input type="number" class="form-control" id="caloriesBurned" min="0">
+            </div>
+            <div class="mb-3">
+                <label for="activityNotes" class="form-label">Notes (optional)</label>
+                <textarea class="form-control" id="activityNotes" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary glow-button w-100 py-2 fs-5 rounded-3">Log Activity</button>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3>All Activities Logged</h3>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="filterDateFrom" class="form-label">Filter from Date:</label>
+            <input type="date" class="form-control" id="filterDateFrom">
+            <button class="btn btn-secondary mt-2" id="applyFilterBtn">Apply Filter</button>
+        </div>
+        <div id="activitiesList">
+            <p class="text-muted">Loading activities...</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/patient_activities.js') }}"></script>
+{% endblock %}
