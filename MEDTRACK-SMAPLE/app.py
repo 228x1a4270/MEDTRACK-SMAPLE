@@ -53,7 +53,7 @@ HEALTH_METRICS_TABLE_NAME = os.environ.get('HEALTH_METRICS_TABLE_NAME', 'Wellnes
 GOALS_TABLE_NAME = os.environ.get('GOALS_TABLE_NAME', 'WellnessGoals')
 
 # SNS Configuration
-SNS_TOPIC_ARN = arn:aws:sns:us-east-1:253490749648:beautysalon:a7161d75-ba6d-4714-9aaf-a8f4a7ad48c7
+SNS_TOPIC_ARN = os.environ.get('SNS_TOPIC_ARN')
 ENABLE_SNS = os.environ.get('ENABLE_SNS', 'False').lower() == 'true'
 
 # Login attempt tracking
